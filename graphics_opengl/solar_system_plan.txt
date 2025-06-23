@@ -1,0 +1,113 @@
+3D Solar System Simulation Plan using PyOpenGL (Python)
+
+==============================
+✅ Objective
+==============================
+Create a simple 3D simulation of a solar system with:
+- The Sun (center)
+- Earth orbiting the Sun
+- Moon orbiting the Earth
+
+Demonstrates:
+- Hierarchical modeling
+- Transformation matrices
+- Basic lighting and shading
+
+==============================
+🛠️ Tools & Libraries
+==============================
+- Python 3
+- PyOpenGL (OpenGL bindings for Python)
+- GLUT (for window/context creation)
+
+Install with:
+pip install PyOpenGL PyOpenGL_accelerate
+
+==============================
+📐 Scene Structure
+==============================
+Sun:
+- Static sphere at the center
+- Emits light (GL_LIGHT0)
+
+Earth:
+- Orbits around the Sun (rotating transform)
+- Rotates on its own axis
+- Smaller than the Sun
+
+Moon:
+- Orbits around the Earth
+- Smallest object
+- Hierarchical to Earth’s transformation
+
+==============================
+🔄 Transformations Plan
+==============================
+
+Display function (called every frame):
+
+1. Clear scene (glClear)
+2. Reset matrix (glLoadIdentity)
+
+3. Draw Sun:
+   - Use glutSolidSphere(radius, slices, stacks)
+
+4. Earth Transformation:
+   - glRotatef(earth_orbit_angle, 0, 1, 0)
+   - glTranslatef(distance_from_sun, 0, 0)
+   - Draw Earth
+
+5. Moon Transformation:
+   - glRotatef(moon_orbit_angle, 0, 1, 0)
+   - glTranslatef(distance_from_earth, 0, 0)
+   - Draw Moon
+
+6. Swap buffers (glutSwapBuffers)
+
+==============================
+💡 Lighting and Materials
+==============================
+- Enable lighting: glEnable(GL_LIGHTING)
+- Use glLightfv() to set light position (Sun)
+- Use glMaterialfv() for color/shininess of each planet
+- Enable depth testing: glEnable(GL_DEPTH_TEST)
+
+==============================
+🧪 Animation
+==============================
+Use glutIdleFunc() to update angles:
+- Increment earth_orbit_angle and moon_orbit_angle over time
+- Redisplay scene using glutPostRedisplay()
+
+==============================
+🧱 Pseudocode (Python Style)
+==============================
+
+def display():
+    glClear(...)
+    glLoadIdentity()
+    
+    # Draw Sun
+    draw_sphere(position=(0,0,0), radius=1.0, color=(1,1,0))
+
+    glPushMatrix()
+        # Earth orbit
+        glRotatef(earth_angle, 0, 1, 0)
+        glTranslatef(5.0, 0.0, 0.0)
+        draw_sphere(radius=0.5, color=(0, 0, 1))
+
+        glPushMatrix()
+            # Moon orbit
+            glRotatef(moon_angle, 0, 1, 0)
+            glTranslatef(1.0, 0.0, 0.0)
+            draw_sphere(radius=0.1, color=(0.6, 0.6, 0.6))
+        glPopMatrix()
+
+    glPopMatrix()
+
+    glutSwapBuffers()
+
+==============================
+📎 Note
+==============================
+Even if visual output isn't built, describing hierarchy, transformations, and rendering flow is key to this test.

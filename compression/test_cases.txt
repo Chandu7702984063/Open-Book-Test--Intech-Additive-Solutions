@@ -1,0 +1,60 @@
+==============================
+Test Case 1
+==============================
+Input:
+aabcccccaaa
+
+Step 1 - Basic Compression:
+a2b1c5a3
+
+Step 2 - Advanced Compression:
+ab1c5a3
+
+Step 3 - Decompression:
+aabcccccaaa
+
+✔ Result matches original input
+
+------------------------------
+
+==============================
+Test Case 2
+==============================
+Input:
+a20b20c1a4
+
+Step 1 - Basic Compression:
+a20b20c1a4
+
+Step 2 - Advanced Compression:
+ab20c1a4
+
+Step 3 - Decompression:
+a (implicit single a)
+bbbbbbbbbbbbbbbbbbbb (20 times)
+c
+aaaa (4 times)
+
+Decompressed Output:
+abbbbbbbbbbbbbbbbbbbbcaaaa
+
+✔ Result matches expected expanded string
+
+------------------------------
+
+Test Case 3 (Edge case - Empty string)
+==============================
+Input:
+<empty string>
+
+Step 1 - Basic Compression:
+<empty string>
+
+Step 2 - Advanced Compression:
+<empty string>
+
+Step 3 - Decompression:
+<empty string>
+
+✔ All steps handled correctly for empty input
+
